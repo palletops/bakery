@@ -15,9 +15,9 @@ individually.
 
 Component | Description
 ----------|-------------
-`om-root` | an Om root element
-`jetty`   | a jetty server
-`httpkit` | a httpkit server
+[`om-root`](src/cljs/com/palletops/bakery/om_root.cljs) | an Om root element
+[`jetty`](src/clj/com/palletops/bakery/jetty.clj)       | a jetty server
+[`httpkit`](src/clj/com/palletops/bakery/httpkit.clj)   | a httpkit server
 
 
 ## License
