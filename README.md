@@ -15,10 +15,11 @@ individually.
 
 Component | Description
 ----------|-------------
-[`om-root`](src/cljs/com/palletops/bakery/om_root.cljs) | an Om root element
-[`jetty`](src/clj/com/palletops/bakery/jetty.clj)       | a jetty server
-[`httpkit`](src/clj/com/palletops/bakery/httpkit.clj)   | a httpkit server
-[`sente`](src/clj/com/palletops/bakery/sente.clj)       | a sente server
+[`om-root`](src/cljs/com/palletops/bakery/om_root.cljs)     | an Om root element
+[`jetty`](src/clj/com/palletops/bakery/jetty.clj)           | a jetty server
+[`httpkit`](src/clj/com/palletops/bakery/httpkit.clj)       | a httpkit server
+[`sente`](src/clj/com/palletops/bakery/sente.clj)           | a sente server
+[`secretary`](src/cljs/com/palletops/bakery/secretary.cljs) | secretary based routing
 
 
 ## License
