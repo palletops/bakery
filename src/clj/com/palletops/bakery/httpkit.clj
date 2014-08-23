@@ -5,12 +5,12 @@
    [com.palletops.leaven.protocols :refer [ILifecycle]]
    [org.httpkit.server :as httpkit]))
 
-(defn start
+(defn- start
   [app {:keys [port join?] :as config}]
   {:pre [app port]}
   (httpkit/run-server app {:port port :join? join?}))
 
-(defn stop
+(defn- stop
   [server stop-timeout]
   (server :timeout stop-timeout))
 
@@ -29,6 +29,10 @@
       component)))
 
 (defn httpkit
+  "Return an httpkit component, that will dispatch to the `app` handler.
+  An optional :stop-timeout can specify a timeout when waiting for the
+  server to stop (defaults to 100ms).  All other options are passed to
+  httpkit.  The default port is 3000."
   [{:keys [app port join? stop-timeout]
     :or {stop-timeout 100}
     :as options}]

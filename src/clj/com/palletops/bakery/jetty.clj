@@ -29,6 +29,8 @@
       component)))
 
 (defn jetty
+  "Return a jetty component, that will dispatch to the `app` handler.
+  All other options are passed to jetty.  The default port is 3000."
   [{:keys [app port join?] :as config}]
   (map->Jetty {:config (merge
                         {:app app
