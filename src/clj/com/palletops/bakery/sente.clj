@@ -14,10 +14,6 @@
 (defn start [{:keys [msg-handler path sente-config announce-fn]}]
   {:pre [msg-handler]}
   (let [chan-sock (sente/make-channel-socket! path sente-config)
-        chan-sock (select-keys chan-sock
-                               [:ch-recv :send-fn
-                                :ajax-post-fn
-                                :ajax-get-or-ws-handshake-fn])
         router (sente/start-chsk-router-loop!
                 msg-handler (:ch-recv chan-sock))]
     (when announce-fn
