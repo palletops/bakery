@@ -27,8 +27,7 @@
 (defn start [{:keys [msg-handler path sente-config announce-fn]} chan-sock-atom]
   {:pre [msg-handler chan-sock-atom]}
   (let [chan-sock (sente/make-channel-socket! path sente-config)
-        router (sente/start-chsk-router-loop!
-                msg-handler (:ch-recv chan-sock))]
+        router (sente/start-chsk-router-loop! msg-handler (:ch-recv chan-sock))]
     (reset! chan-sock-atom chan-sock)
     (when announce-fn
       (announce-fn chan-sock))
@@ -57,11 +56,12 @@
 
 (defn sente
   "Return a sente component, routing messages to `msg-handler`.
-  `announce-fn` will be called on start with the channel socket as an
-  argument.  The `:routes` key will contain Ring routes for handling
-  asynchronous requests, which need to be injected into your
-  application's routes.  The `:path` key can be used to override the
-  default path for these routes."
+  `sente-config` is a map passed to the last argument of sente's
+  `make-channel-socket!` function.  `announce-fn` will be called on
+  start with the channel socket as an argument.  The `:routes` key
+  will contain Ring routes for handling asynchronous requests, which
+  need to be injected into your application's routes.  The `:path` key
+  can be used to override the default path for these routes."
   [{:keys [path msg-handler announce-fn sente-config]}]
   (let [chan-sock-atom (atom nil)
         config {:path (or path "/chsk")
