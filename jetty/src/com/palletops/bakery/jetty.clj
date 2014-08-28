@@ -13,7 +13,7 @@
   (jetty/run-jetty handler config))
 
 (defn- stop
-  [{:keys [^org.eclipse.jetty.server.Server server]}]
+  [^org.eclipse.jetty.server.Server server]
   (.stop server))
 
 (defrecord Jetty [handler config server]
