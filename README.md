@@ -2,26 +2,17 @@
 
 A library of components for [leaven][leaven].
 
-## Install
-
-Add `[com.palletops/bakery "0.1.0-SNAPSHOT"]` to your `:dependencies`.
-
-Note that bakery is a heterogeneous collection.  In order not to force
-a bundle of unwanted dependencies on your project, you'll need to
-ensure that you add the required dependencies for each component
-individually.
-
 ## Usage
 
 Component | Description
 ----------|-------------
-[`jetty`](src/clj/com/palletops/bakery/jetty.clj)           | a jetty server
-[`httpkit`](src/clj/com/palletops/bakery/httpkit.clj)       | a httpkit server
-[`local-storage-atom`](src/cljs/com/palletops/bakery/local_storage_atom.cljs) | an atom backed by HTML 5 local storage
-[`om-root`](src/cljs/com/palletops/bakery/om_root.cljs)     | an Om root element
-[`sente`](src/clj/com/palletops/bakery/sente.clj)           | a sente clojure server
-[`sente`](src/cljs/com/palletops/bakery/sente.cljs)         | a sente clojurescript client
-[`secretary`](src/cljs/com/palletops/bakery/secretary.cljs) | secretary based routing
+[`jetty`](jetty/README.md)                           | a jetty server
+[`httpkit`](httpkit/README.md)                       | a httpkit server
+[`local-storage-atom`](local-storage-atom/README.md) | an atom backed by HTML 5 local storage
+[`om-root`](om-root/README.md)                       | an Om root element
+[`sente`](sente/README.md)                           | sente server and client components
+[`secretary`](secretary/README.md)                   | secretary based routing
+[`weasel`](weasel/README.md)                         | weasel based clojurescript repl
 
 
 ## License
