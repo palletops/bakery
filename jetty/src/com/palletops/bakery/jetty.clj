@@ -1,6 +1,5 @@
 (ns com.palletops.bakery.jetty
   "Component for running jetty server.
-  Requires [ring/ring-jetty-adapter \"1.3.0\"].
   Provides an idempotent start and stop."
   (:require
    [com.palletops.api-builder.api :refer [defn-api]]
@@ -9,7 +8,7 @@
    [schema.core :as schema]))
 
 (defn- start
-  [{:keys [handler {:keys [port join?] :as config}]}]
+  [handler {:keys [port join?] :as config}]
   {:pre [handler port]}
   (jetty/run-jetty handler config))
 
@@ -17,12 +16,12 @@
   [{:keys [^org.eclipse.jetty.server.Server server]}]
   (.stop server))
 
-(defrecord Jetty [config server]
+(defrecord Jetty [handler config server]
   ILifecycle
   (start [component]
     (if server
       component
-      (assoc component :server (start config))))
+      (assoc component :server (start handler config))))
   (stop [component]
     (if server
       (do
