@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :modules {:inherited
-            {:dependencies [[com.palletops/leaven "0.1.0"
+            {:dependencies [[com.palletops/leaven "0.1.1"
                              :exclusions [com.keminglabs/cljx]]]}}
   :source-paths ["src/clj"]
   :resource-paths ["src/cljs"]
