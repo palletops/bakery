@@ -17,3 +17,16 @@
     (if js/localStorage
       (local-storage app-state-atom key)
       app-state-atom)))
+
+;; define a value reference type that is serialised as nil
+(deftype Filtered [v]
+  IDeref
+  (-deref [_] v)
+  tailrecursion.cljson/EncodeTagged
+  (-encode [_] nil))
+
+(defn transient-value
+  "Return a value that when deref'd wil return v, and will not be
+  stored in local storage."
+  [v]
+  (Filtered. v))
