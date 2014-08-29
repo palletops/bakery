@@ -34,7 +34,7 @@
                  [ring "1.3.0"]
                  [ring/ring-headers "0.1.0"]
                  [ring/ring-anti-forgery "1.0.0"]
-                 [hickory "0.5.3"]
+                 [hickory "0.5.4"]
                  [cheshire "5.3.1"]
                  [com.taoensso/timbre "3.2.1"]]
 
