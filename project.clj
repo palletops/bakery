@@ -11,4 +11,6 @@
   :plugins [[lein-modules "0.3.8"]]
   :aliases {"install" ["modules" "install"]
             "deploy" ["modules" "deploy"]
-            "clean" ["with-profiles" "+no-subprocess" "modules" "clean"]})
+            "check" ["modules" "check"]
+            "test" ["modules" "test"]
+            "clean" ["with-profile" "+no-subprocess" "modules" "clean"]})
