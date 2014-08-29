@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-web-app "0.0.1-SNAPSHOT"
+(defproject com.palletops/bakery-web-app "0.1.0-SNAPSHOT"
   :description "A web app with bakery"
   :url "http://palletops.com/example.webapp"
   :license {:name "Eclipse Public License - v 1.0"
@@ -24,7 +24,9 @@
                  ;; client
                  [prismatic/om-tools "0.3.3"
                   :exclusions [org.clojure/clojure com.keminglabs/cljx]]
-                 [racehub/om-bootstrap "0.2.6"]
+                 [racehub/om-bootstrap "0.2.6"
+                  :exclusions [org.clojure/clojure prismatic/om-tools
+                               com.keminglabs/cljx]]
 
                  ;; server
                  [org.clojure/tools.cli "0.3.1"]
@@ -36,24 +38,8 @@
                  [cheshire "5.3.1"]
                  [com.taoensso/timbre "3.2.1"]]
 
-  :plugins [[lein-cljsbuild "1.0.3"]
-            [com.keminglabs/cljx "0.4.0" :exclusions [org.clojure/clojure]]]
-
-  :hooks [cljx.hooks
-          leiningen.cljsbuild]
-
-  :cljx {:builds [{:source-paths ["src/cljx"]
-                   :output-path "target/generated"
-                   :rules :clj}
-                  {:source-paths ["src/cljx"]
-                   :output-path "target/generated"
-                   :rules :cljs}
-                  {:source-paths ["test/cljx"]
-                   :output-path "target/test-generated"
-                   :rules :clj}
-                  {:source-paths ["test/cljx"]
-                   :output-path "target/test-generated"
-                   :rules :cljs}]}
+  :plugins [[lein-cljsbuild "1.0.3"]]
+  :hooks [leiningen.cljsbuild]
 
   :jar-exclusions [#"\.cljx|\.swp|\.swo|\.DS_Store"]
 
@@ -62,7 +48,6 @@
          :dependencies [[com.facebook/react "0.11.1"]
                         [com.cemerick/piggieback "0.1.3"]
                         [weasel "0.3.0"]]
-         :plugins [[com.cemerick/clojurescript.test "0.3.1"]]
          :cljsbuild {:builds [{:id "example.webapp"
                                :source-paths ["src/cljs"]
                                :compiler
@@ -70,13 +55,7 @@
                                 :output-dir "target/classes/public/js"
                                 :optimizations :none
                                 :pretty-print true
-                                :source-map true}}
-                              ;; {:id "test"
-                              ;;  :source-paths ["src/cljs" "test/cljs"]
-                              ;;  :compiler {:output-to "target/cljs-test/testable.js"
-                              ;;             :optimizations :whitespace
-                              ;;             :pretty-print true}}
-                              ]}}
+                                :source-map true}}]}}
    :repl {:injections [(try
                          (require
                           '[example.webapp.server.dev
@@ -87,9 +66,7 @@
 
    :uberjar {:cljsbuild
              ^:replace {:builds [{:id "example.webapp"
-                                  :source-paths ["src/cljs"
-                                                 ;; "target/generated"
-                                                 ]
+                                  :source-paths ["src/cljs"]
                                   :compiler
                                   {:output-to "target/classes/public/js/example.webapp.min.js"
                                    :optimizations :advanced
@@ -98,26 +75,4 @@
                                    :externs ["react/externs/react.js"]}}]}
              :aot [example.webapp.main #"example.webapp.services\..*"]
              :main example.webapp.main
-             :omit-source true}
-   :test {:cljsbuild
-          ^:replace {:builds [{:id "example.webapp"
-                               :source-paths ["src/cljs"
-                                              "test/cljs"
-                                              ;; "target/generated"
-                                              ]
-                               :compiler
-                               {:output-to "target/classes/public/js/example.webapp.test.js"
-                                :optimizations :whitespace
-                                :pretty-print true
-                                :preamble ["react/react.js"]
-                                :externs ["react/externs/react.js"]}}]
-                     ;; Test command for running the unit tests in "test-cljs"
-                     ;;    $ lein cljsbuild test
-                     :test-commands
-                     {"unit" ["runners/phantomjs.js"
-                              "window.literal_js_executed=true"
-                              "test-resources/public/js/es5-shim.js"
-                              "test-resources/public/js/es5-sham.js"
-                              "test-resources/public/js/console-polyfill.js"
-                              "target/classes/public/js/example.webapp.test.js"
-                              :runner]}}}})
+             :omit-source true}})
