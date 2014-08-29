@@ -38,7 +38,8 @@
                  [cheshire "5.3.1"]
                  [com.taoensso/timbre "3.2.1"]]
 
-  :plugins [[lein-cljsbuild "1.0.3"]]
+  :plugins [[lein-modules "0.3.8"]
+            [lein-cljsbuild "1.0.3"]]
   :hooks [leiningen.cljsbuild]
 
   :jar-exclusions [#"\.cljx|\.swp|\.swo|\.DS_Store"]
