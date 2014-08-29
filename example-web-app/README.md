@@ -1,30 +1,17 @@
 # example.webapp
 
-A UI for [pallet](http://palletops.com).
+A single page web app using [leaven][leaven] components from
+[bakery][bakery].
 
 ## Usage
 
-### Repl
-Start a repl, and run
+Start a repl and run `(start {})` to start the webserver on port 3000.
 
-```clj
-(run)
-(browser-repl)
-```
+Call `(start-cljs-repl!)` and refresh your browser to create a
+clojurescript repl.
 
-Point your browser at http://localhost:3000
-
-### Uberjar
-
-```clj
-lein uberjar
-java -jar target/example.webapp-*-standalone.jar
-```
-
-## Services
-
-Services are discovered using `example.webapp.services.*` namespaces.
-
+Uses httpkit, sente, weasel, storage-atom, secretary, om-bootstrap
+among other libraries.
 
 ## License
 
@@ -32,3 +19,6 @@ Copyright © 2014 Hugo Duncan
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
+
+[bakery]:https://github.com/palletops/bakery "bakery components for leaven"
+[leaven]:https://github.com/palletops/leaven "leaven component library"
