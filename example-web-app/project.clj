@@ -39,24 +39,37 @@
                  [com.taoensso/timbre "3.2.1"]]
 
   :plugins [[lein-modules "0.3.8"]
-            [lein-cljsbuild "1.0.3"]]
+            [lein-cljsbuild "1.0.3"]
+            [com.cemerick/clojurescript.test "0.3.1"]]
   :hooks [leiningen.cljsbuild]
 
   :jar-exclusions [#"\.cljx|\.swp|\.swo|\.DS_Store"]
 
+  :cljsbuild {:builds [{:id "example.webapp"
+                        :source-paths ["src/cljs"]
+                        :compiler
+                        {:output-to "target/classes/public/js/example.webapp.js"
+                         :output-dir "target/classes/public/js"
+                         :optimizations :none
+                         :pretty-print true
+                         :source-map true}}
+                       {:id "test"
+                        :source-paths ["src/clj" "src/cljs" "test/cljs"]
+                        :compiler
+                        {:output-to "target/cljs-test/testable.js"
+                         :optimizations :whitespace
+                         :pretty-print true
+                         :preamble ["react/react.js"]
+                         :externs ["react/externs/react.js"]}}]
+              :test-commands {"unit" ["phantomjs"
+                                      "--local-storage-quota=1024"
+                                      :runner
+                                      "test-resources/public/js/es5-shim.js"
+                                      "test-resources/public/js/es5-sham.js"
+                                      "test-resources/public/js/console-polyfill.js"
+                                      "target/cljs-test/testable.js"]}}
   :profiles
-  {:dev {:resource-paths ["resources"]
-         :dependencies [[com.facebook/react "0.11.1"]
-                        [com.cemerick/piggieback "0.1.3"]
-                        [weasel "0.3.0"]]
-         :cljsbuild {:builds [{:id "example.webapp"
-                               :source-paths ["src/cljs"]
-                               :compiler
-                               {:output-to "target/classes/public/js/example.webapp.js"
-                                :output-dir "target/classes/public/js"
-                                :optimizations :none
-                                :pretty-print true
-                                :source-map true}}]}}
+  {:dev {:dependencies [[com.facebook/react "0.11.1"]]}
    :repl {:injections [(try
                          (require
                           '[example.webapp.server.dev
