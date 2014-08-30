@@ -14,12 +14,12 @@
                  [org.clojure/core.async "0.1.303.0-886421-alpha"
                   :exclusions [[org.clojure/clojure]]]
 
-                 [com.palletops/bakery-httpkit "0.1.0-SNAPSHOT"]
-                 [com.palletops/bakery-weasel "0.1.0-SNAPSHOT"]
-                 [com.palletops/bakery-sente "0.1.0-SNAPSHOT"]
-                 [com.palletops/bakery-secretary "0.1.0-SNAPSHOT"]
-                 [com.palletops/bakery-local-storage-atom "0.1.0-SNAPSHOT"]
-                 [com.palletops/bakery-om-root "0.1.0-SNAPSHOT"]
+                 [com.palletops/bakery-httpkit :version]
+                 [com.palletops/bakery-weasel :version]
+                 [com.palletops/bakery-sente :version]
+                 [com.palletops/bakery-secretary :version]
+                 [com.palletops/bakery-local-storage-atom :version]
+                 [com.palletops/bakery-om-root :version]
 
                  ;; client
                  [prismatic/om-tools "0.3.3"
