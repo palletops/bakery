@@ -15,6 +15,8 @@ Component | Description
 [`weasel`](weasel/README.md)                         | weasel based clojurescript repl
 
 
+For an example of using some of these components, see the [example web app](example-web-app/).
+
 ## License
 
 Copyright © 2014 Hugo Duncan
