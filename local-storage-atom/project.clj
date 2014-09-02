@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-local-storage-atom "0.1.0"
+(defproject com.palletops/bakery-local-storage-atom "0.1.1"
   :description "A leaven component for local-storage-atom"
   :url "https://github.com/palletops/bakery"
   :license {:name "Eclipse Public License"

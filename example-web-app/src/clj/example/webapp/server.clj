@@ -34,14 +34,14 @@
                 #(or % (str (java.util.UUID/randomUUID)))))))
 
 (defn ui-app
-  [state channel-socket-atom injected-routes tags]
+  [state injected-routes tags]
   (->
    (site injected-routes tags)
    wrap-stacktrace
    wrap-absolute-redirects
    wrap-not-modified
    wrap-stacktrace
-   (wrap-data {:state state :channel-socket channel-socket-atom})
+   (wrap-data {:state state})
    wrap-random-uid
    (wrap-anti-forgery
     {:read-token (fn [req] (-> req :params :csrf-token))})
@@ -52,14 +52,11 @@
 (defn server
   [options]
   (let [state (atom (default-state))
-        sock (atom nil)
-        sente (sente/sente {:handler #'msg-handler
-                            :announce-fn #(reset! sock %)})
+        sente (sente/sente {:handler #'msg-handler})
         script-tags (:tags options (js-script))]
     (map->Server
      {:state state
-      :channel-socket sock
       :sente sente
       :server (httpkit/httpkit
-               {:handler (ui-app state sock (:routes sente) script-tags)
+               {:handler (ui-app state (:routes sente) script-tags)
                 :config options})})))

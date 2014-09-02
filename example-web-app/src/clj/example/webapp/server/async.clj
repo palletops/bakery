@@ -5,15 +5,13 @@
    [example.webapp.server.data-middleware :as dm :refer [wrap-data]]
    [taoensso.timbre :refer [debugf errorf tracef]]))
 
-(defn wrap-update-send-fns
-  "Middleware to update the state :send-fns."
+(defn wrap-update-send-fn
+  "Middleware to update the state :send-fn."
   [handler]
-  (fn update-send-fns [{:as ev-msg :keys [ring-req event ?reply-fn]}]
-    (let [session (:session ring-req)
-          uid     (:uid session)
-          {:keys [state channel-socket]} (dm/data ring-req)]
-      ;; capture a uid to send-fn mapping
-      (swap! state assoc :send-fn (:send-fn @channel-socket)))
+  (fn update-send-fn [{:as ev-msg :keys [ring-req event ?reply-fn send-fn]}]
+    (let [{:keys [state]} (dm/data ring-req)]
+      ;; capture a send-fn
+      (swap! state assoc :send-fn send-fn))
     (handler ev-msg)))
 
 (defn msg-handler-fn
@@ -22,7 +20,7 @@
   (let [session (:session ring-req)
         uid     (:uid session)
         [id data :as ev] event
-        {:keys [state channel-socket]} (dm/data ring-req)]
+        {:keys [state]} (dm/data ring-req)]
 
     (debugf "Event uid: %s" uid)
     (tracef "Event session: %s" session)
@@ -38,10 +36,10 @@
 
 (def msg-handler*
   (-> msg-handler-fn
-      wrap-update-send-fns))
+      wrap-update-send-fn))
 
 (defn msg-handler
-  [{:as ev-msg :keys [ring-req event ?reply-fn]} _]
+  [{:as ev-msg :keys [ring-req event ?reply-fn]}]
   (let [[id data :as ev] event]
 
     (debugf "Event id: %s" id)

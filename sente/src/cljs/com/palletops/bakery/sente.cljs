@@ -9,29 +9,13 @@
    [schema.core :as schema :refer [optional-key]]
    [taoensso.sente :as sente]))
 
-(defn- start-router
-  "A router for events that will be passed a receive channel and a
-  send function."
-  [event-handler {:keys [ch-recv send-fn] :as chan-sock}]
-  (let [ctrl-ch (chan)]
-    (go-loop []
-      (let [[v p] (alts! [ch-recv ctrl-ch])]
-        (if (identical? p ctrl-ch) ::stop
-          (let [[id data :as event] v]
-            ;; Provide ch to handler to allow event injection back into loop:
-            (event-handler  ; Allow errors to throw
-             {:event event
-              :channel-socket chan-sock})
-            (recur)))))
-    (fn stop! [] (close! ctrl-ch))))
-
 (defn- start
   [{:keys [handler path config announce-fn] :as component}]
   {:pre [handler]}
   (let [chan-sock (sente/make-channel-socket! path config)
-        router (start-router
-                handler
-                (select-keys chan-sock [:ch-recv :send-fn]))]
+        router (sente/start-chsk-router!
+                (:ch-recv chan-sock)
+                handler)]
     (when announce-fn
       (announce-fn chan-sock))
     (assoc component

@@ -18,7 +18,7 @@
 (defn handle-recv
   [state]
   (fn
-    [{:keys [event]} chan-sock]
+    [{:keys [event send-fn]}]
     (let [[id data :as ev] event]
       (.log js/console "Event id:" id )
       (.log js/console "Event:" ev)
