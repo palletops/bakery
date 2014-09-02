@@ -6,6 +6,6 @@
   :plugins [[lein-modules "0.3.8"]]
   :resource-paths ["src/cljs"]
   :source-paths ["src/clj"]
-  :dependencies [[com.taoensso/sente "0.15.1"
+  :dependencies [[com.taoensso/sente "1.0.0"
                   :exclusions [com.keminglabs/cljx]]
                  [compojure "1.1.8"]])

@@ -36,7 +36,7 @@
                  [ring/ring-anti-forgery "1.0.0"]
                  [hickory "0.5.4"]
                  [cheshire "5.3.1"]
-                 [com.taoensso/timbre "3.2.1"]]
+                 [com.taoensso/timbre "3.3.0"]]
 
   :plugins [[lein-modules "0.3.8"]
             [lein-cljsbuild "1.0.3"]

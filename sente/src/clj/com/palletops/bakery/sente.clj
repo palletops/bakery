@@ -10,10 +10,6 @@
    [taoensso.sente :as sente]
    [taoensso.timbre :as timbre]))
 
-(defn- random-id
-  [req]
-  (str (java.util.UUID/randomUUID)))
-
 (defn- sente-routes
   "Return the Ring routes required for Sente."
   [path chan-sock-atom]
@@ -29,7 +25,7 @@
   [{:keys [handler path config announce-fn]} chan-sock-atom]
   {:pre [handler chan-sock-atom]}
   (let [chan-sock (sente/make-channel-socket! path config)
-        router (sente/start-chsk-router-loop! handler (:ch-recv chan-sock))]
+        router (sente/start-chsk-router! (:ch-recv chan-sock) handler)]
     (reset! chan-sock-atom chan-sock)
     (when announce-fn
       (announce-fn chan-sock))
@@ -41,7 +37,6 @@
   {:pre [router]}
   (router)
   (close! (:ch-recv channel-socket)))
-
 
 (defrecord Sente
     [config channel-socket router routes chan-sock-atom]
@@ -79,9 +74,7 @@
         config {:path (or path "/chsk")
                 :handler handler
                 :announce-fn announce-fn
-                :config (merge {:type :auto
-                                      :user-id-fn random-id}
-                                     config)}]
+                :config (merge {:type :auto} config)}]
     (map->Sente
      {:config config
       :chan-sock-atom chan-sock-atom
