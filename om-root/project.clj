@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-om-root "0.1.1-SNAPSHOT"
+(defproject com.palletops/bakery-om-root "0.1.1"
   :description "A leaven component for an om-root"
   :url "https://github.com/palletops/bakery"
   :license {:name "Eclipse Public License"

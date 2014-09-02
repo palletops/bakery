@@ -4,7 +4,7 @@ A [leaven][leaven] component for a root [om][om] component.
 
 ## Install
 
-Add `[com.palletops/bakery-om-root "0.1.0-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-om-root "0.1.1-SNAPSHOT"]` to your
 `:dependencies`.
 
 ## Usage

@@ -4,7 +4,7 @@ A [leaven][leaven] component for running a [http-kit][http-kit] server.
 
 ## Install
 
-Add `[com.palletops/bakery-httpkit "0.1.0-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-httpkit "0.1.1-SNAPSHOT"]` to your
 `:dependencies`.
 
 ## Usage
