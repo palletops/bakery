@@ -5,6 +5,12 @@ A single page web app using [leaven][leaven] components from
 
 ## Usage
 
+Clone the project, and checkout the `master` branch (to run the
+default `develop` branch you would need to `lein install` the top
+level [bakery][bakery] project first).
+
+Run `lein cljsbuild once`.
+
 Start a repl and run `(start {})` to start the webserver on port 3000.
 
 Call `(start-cljs-repl!)` and refresh your browser to create a
