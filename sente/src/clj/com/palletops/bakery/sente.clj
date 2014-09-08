@@ -3,7 +3,7 @@
   (:require
    [clojure.core.async :as async :refer [chan close! go-loop]]
    [com.palletops.api-builder.api :refer [defn-api]]
-   [com.palletops.leaven.protocols :refer [ILifecycle]]
+   [com.palletops.leaven.protocols :refer [Startable Stoppable]]
    [compojure.core :refer [GET POST routes]]
    [compojure.route :refer [resources]]
    [schema.core :as schema :refer [optional-key]]
@@ -40,11 +40,12 @@
 
 (defrecord Sente
     [config channel-socket router routes chan-sock-atom]
-  ILifecycle
+  Startable
   (start [component]
     (if channel-socket
       component
       (merge component (start config chan-sock-atom))))
+  Stoppable
   (stop [component]
     (if channel-socket
       (do

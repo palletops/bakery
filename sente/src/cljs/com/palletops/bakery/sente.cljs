@@ -5,7 +5,7 @@
    [cljs.core.async.macros :refer [go-loop]])
   (:require
    [cljs.core.async :refer [alts! chan close!]]
-   [com.palletops.leaven.protocols :refer [ILifecycle]]
+   [com.palletops.leaven.protocols :refer [Startable Stoppable]]
    [schema.core :as schema :refer [optional-key]]
    [taoensso.sente :as sente]))
 
@@ -30,9 +30,10 @@
 
 (defrecord Sente
     [channel-socket router handler path config async-send-fn]
-  ILifecycle
+  Startable
   (start [component]
     (start component))
+  Stoppable
   (stop [component]
     (stop component)))
 

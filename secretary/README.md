@@ -12,7 +12,7 @@ Add `[com.palletops/bakery-secretary "0.1.1-SNAPSHOT"]` to your
 The `com.palletops.bakery.secretary/secretary`
 function returns a [leaven][leaven] component that wires up google closure's `History` to secretary.
 
-The component implements the `ILifecycle` protocol.
+The component implements the `Startable` and `Stoppable` protocols.
 
 ## License
 

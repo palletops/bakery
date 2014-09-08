@@ -3,7 +3,7 @@
   Provides an idempotent start and stop."
   (:require
    [com.palletops.api-builder.api :refer [defn-api]]
-   [com.palletops.leaven.protocols :refer [ILifecycle]]
+   [com.palletops.leaven.protocols :refer [Startable Stoppable]]
    [ring.adapter.jetty :as jetty]
    [schema.core :as schema]))
 
@@ -17,11 +17,12 @@
   (.stop server))
 
 (defrecord Jetty [handler config server]
-  ILifecycle
+  Startable
   (start [component]
     (if server
       component
       (assoc component :server (start handler config))))
+  Stoppable
   (stop [component]
     (if server
       (do
