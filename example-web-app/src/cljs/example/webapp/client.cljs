@@ -26,10 +26,10 @@
   (. js/document (getElementById id)))
 
 (def default-state
-  {;; :nav is used to control what is on the screen
-   ;; at any time. It is a map, where the :view key specifes
-   ;; the view and other keys specify data for that view.
-   :nav {}})
+  (atom {;; :nav is used to control what is on the screen
+         ;; at any time. It is a map, where the :view key specifes
+         ;; the view and other keys specify data for that view.
+         :nav {}}))
 
 (defn make-ui
   []
