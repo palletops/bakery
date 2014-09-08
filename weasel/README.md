@@ -26,14 +26,14 @@ takes a single map as argument with the following keys.
 
 ### Clojure Server
 
-The component does not implement the `ILifecycle` protocol.  To start
-the clojurescript repl you can call the zero argument function placed
-on the component's `:start-repl!` key.
+The component does not implement the `Startable` and `Stoppable`
+protocols.  To start the clojurescript repl you can call the zero
+argument function placed on the component's `:start-repl!` key.
 
 ### Clojurescript Client
 
-The `ILifecycle` implementation will start and stop the client
-connection.
+The `Startable` and `Stoppable` implementations will start and stop
+the client connection.
 
 ## License
 

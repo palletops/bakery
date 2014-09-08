@@ -20,8 +20,6 @@ accepts two arguments with the following values:
 `key`
 : a keyword for the key to store the atom under in local storage.
 
-The component does not implement the `ILifecycle` protocol.
-
 ## License
 
 Copyright © 2014 Hugo Duncan

@@ -10,7 +10,7 @@
 (defn-api local-storage-atom
   "Return a component that is an atom backed by local storage (if supported).
   `default` is used to initialise the atom if it is not already in
-  local storage.  The ILifecycle protocol is not implemented."
+  local storage.  The Startable and Stoppable protocols are not implemented."
   {:sig [[schema/Any schema/Keyword :- (protocol IDeref)]]}
   [default key]
   (let [app-state-atom (atom default)]
