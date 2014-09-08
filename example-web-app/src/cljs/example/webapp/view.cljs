@@ -7,76 +7,40 @@
    [clojure.data :as data]
    [clojure.string :as string]
    [example.webapp.app :as app]
-   [example.webapp.nav :as nav]
-   [om.core :as om :include-macros true]
-   [om-tools.dom :as dom :include-macros true]
-   [om-bootstrap.button :as b]
-   [om-bootstrap.input :refer [input]]
-   [om-bootstrap.panel :refer [panel]]
-   [om-bootstrap.random :as r]))
-
-(defn display
-  "Return a style map for toggling display based on the boolean value
-  of show."
-  [show]
-  (if show
-    #js {}
-    #js {:display "none"}))
-
-(defn validation-state
-  "Returns a Bootstrap :bs-style string based on the supplied string
-  length."
-  [s]
-  (let [l (count s)]
-    (cond (> l 2) "success"
-          (> l 1) "warning"
-          (pos? l) "error"
-          :else nil)))
+   [reagent.core :as reagent :refer [atom]]))
 
 (defn handle-change
   "Grab the input element via the `input` reference."
-  [state owner]
-  (let [node (om/get-node owner "input")
-        user (.-value node)]
-    (om/transact! state #(app/set-user % user))))
+  [event state]
+  (swap! state assoc :user (-> event .-target .-value)))
 
-(defn who [state owner]
-  (reify
-    om/IRender
-    (render [this]
-      (dom/span
-       {:style (display (= :who (-> state :nav :view)))}
-       (input
-        {:feedback? true
-         :type "text"
-         :label "Who are you?"
-         :placeholder "Enter your name"
-         :help "I'ld like to say hello"
-         :default-value (:user state)
-         :bs-style (validation-state (:text state))
-         :on-change #(handle-change state owner)})
-       (b/button
-        {:bs-style "primary"
-         :on-click (fn [_]
-                     (om/update! state :nav {:view :hi})
-                     (app/start-user! @state))}
-        "Say Hi")))))
+(defn who [nav state]
+  [:span
+   [:input
+    {:feedback? true
+     :type "text"
+     :label "Who are you?"
+     :placeholder "Enter your name"
+     :help "I'ld like to say hello"
+     :default-value (:user @state)
+     ;; :bs-style (validation-state (:text state))
+     :on-change #(handle-change % state)}]
+   [:input {:type "button"
+            :bs-style "primary"
+            :on-click (fn [_]
+                        (reset! nav {:view :hi})
+                        (app/start-user! state))
+            :value "Say Hi"}]])
 
-(defn hi [state owner]
-  (reify
-    om/IRender
-    (render [this]
-      (dom/div
-          {:style (display (= :hi (-> state :nav :view)))}
-        (dom/p (str "Hello " (:user state) " " (:n state)))
-        (b/button
-         {:bs-style "primary" :href "#/"} "Bye")))))
+(defn hi [nav state]
+  [:div
+   [:p (str "Hello " (:user @state) " " (:n @state))]
+   [:a {:type "button" :href "#/"} "Bye"]])
 
-(defn root [state owner]
-  (reify
-    om/IRender
-    (render [this]
-      (r/page-header {} "Example Leaven based WebApp")
-      (panel {}
-             (dom/div (om/build who state {}))
-             (dom/div (om/build hi state {}))))))
+(defn root [nav app-state]
+  [:div
+   [:h1 "Example Leaven based WebApp"]
+   [:div
+    (case (:view @nav)
+      :who (who nav app-state)
+      :hi (hi nav app-state))]])

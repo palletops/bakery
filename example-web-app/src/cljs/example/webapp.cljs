@@ -1,4 +1,5 @@
 (ns example.webapp
+  "Top level client namespace.  Will start the client when require'd."
   (:require
    [com.palletops.leaven :as leaven :include-macros true]
    [example.webapp.client :as client :refer [make-ui]]))

@@ -19,14 +19,9 @@
                  [com.palletops/bakery-sente :version]
                  [com.palletops/bakery-secretary :version]
                  [com.palletops/bakery-local-storage-atom :version]
-                 [com.palletops/bakery-om-root :version]
 
                  ;; client
-                 [prismatic/om-tools "0.3.3"
-                  :exclusions [org.clojure/clojure com.keminglabs/cljx]]
-                 [racehub/om-bootstrap "0.2.6"
-                  :exclusions [org.clojure/clojure prismatic/om-tools
-                               com.keminglabs/cljx]]
+                 [whoops/reagent "0.4.3"]
 
                  ;; server
                  [org.clojure/tools.cli "0.3.1"]

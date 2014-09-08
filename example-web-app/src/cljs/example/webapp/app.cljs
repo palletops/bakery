@@ -6,8 +6,8 @@
 
 (defn start-user!
   [state]
-  (.log js/console "start user")
-  (@(:send-fn state) [:example/msg (:user state)]))
+  (.log js/console "start user %s %s" (pr-str @state) (pr-str (type (:send-fn @state))))
+  (@(:send-fn @state) [:example/msg (:user @state)]))
 
 (defn greet
   [state n]
