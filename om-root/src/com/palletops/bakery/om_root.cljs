@@ -3,14 +3,15 @@
   (:require-macros
    [com.palletops.api-builder.api :refer [defn-api]])
   (:require
-   [com.palletops.leaven.protocols :refer [ILifecycle]]
+   [com.palletops.leaven.protocols :refer [Startable Stoppable]]
    [om.core :as om :include-macros true]
    [schema.core :as schema]))
 
 (defrecord OmRoot [f value options]
-  ILifecycle
+  Startable
   (start [_]
     (om/root f value options))
+  Stoppable
   (stop [_]
     (om/detach-root (:target options))))
 

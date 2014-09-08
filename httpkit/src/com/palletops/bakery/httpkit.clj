@@ -3,7 +3,7 @@
   Provides an idempotent start and stop."
   (:require
    [com.palletops.api-builder.api :refer [defn-api]]
-   [com.palletops.leaven.protocols :refer [ILifecycle]]
+   [com.palletops.leaven.protocols :refer [Startable Stoppable]]
    [org.httpkit.server :as httpkit]
    [schema.core :as schema]))
 
@@ -18,11 +18,12 @@
 
 (defrecord Httpkit
     [config server handler stop-timeout]
-  ILifecycle
+  Startable
   (start [component]
     (if server
       component
       (assoc component :server (start handler config))))
+  Stoppable
   (stop [component]
     (if server
       (do

@@ -29,15 +29,15 @@ takes a single map as argument with the following keys.
 
 ### Clojure Server
 
-The component implements the `ILifecycle` protocol in an idempotent
-fashion.  The component has a `:routes` key that contains ring routes
-for handling the ajax calls used by sente.  These routes need to be
-included in your applications http handler function.
+The component implements the `Startable` and `Stoppable` protocols in
+an idempotent fashion.  The component has a `:routes` key that
+contains ring routes for handling the ajax calls used by sente.  These
+routes need to be included in your applications http handler function.
 
 ### Clojurescript Client
 
-The `ILifecycle` implementation will start and stop the client
-connection.
+The `Startable` and `Stoppable` implementations will start and stop
+the client connection.
 
 ## License
 

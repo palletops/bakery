@@ -21,7 +21,7 @@ accepts two arguments with the following values:
 `key`
 : a keyword for the key to store the atom under in local storage.
 
-The component does not implement the `ILifecycle` protocol.
+The component does not implement the `Startable` and `Stoppable` protocols.
 
 ## License
 

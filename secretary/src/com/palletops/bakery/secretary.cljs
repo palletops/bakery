@@ -3,7 +3,7 @@
   (:require-macros
    [com.palletops.api-builder.api :refer [defn-api]])
   (:require
-   [com.palletops.leaven.protocols :refer [ILifecycle]]
+   [com.palletops.leaven.protocols :refer [Startable Stoppable]]
    [goog.events :as events]
    [goog.history.EventType :as EventType]
    [secretary.core :as secretary :include-macros true])
@@ -30,9 +30,10 @@
 
 (defrecord Routing
     [history nav-fn]
-  ILifecycle
+  Startable
   (start [_]
     (start-routing! history))
+  Stoppable
   (stop [_]
     (start-routing! history)))
 

@@ -11,7 +11,7 @@
   "Return a component that is an atom backed by local storage (if supported).
   `default-atom` is an atom.  It's value is used if it is not already
   in local storage, otherwise it is reset with the value from local
-  storage.  The ILifecycle protocol is not implemented."
+  storage.  The Startable and Stoppable protocols are not implemented."
   {:sig [[(protocol IDeref) schema/Keyword :- (protocol IDeref)]]}
   [default-atom key]
   (if js/localStorage
