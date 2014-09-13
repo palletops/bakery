@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-jetty "0.2.0"
+(defproject com.palletops/bakery-jetty "0.2.1-SNAPSHOT"
   :description "A leaven component for jetty"
   :url "https://github.com/palletops/bakery"
   :license {:name "Eclipse Public License"
