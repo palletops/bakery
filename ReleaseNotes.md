@@ -1,3 +1,8 @@
+## 0.2.0
+
+- Update to use leaven Startable and Stoppable
+  Updates to use the new protocols in leaven 0.2.0.
+
 ## 0.1.2
 
 - Pass default atom to local-storage-atom
