@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-web-app "0.1.1"
+(defproject com.palletops/bakery-web-app "0.1.2"
   :description "A web app with bakery"
   :url "http://palletops.com/example.webapp"
   :license {:name "Eclipse Public License - v 1.0"
@@ -38,7 +38,7 @@
                  [cheshire "5.3.1"]
                  [com.taoensso/timbre "3.3.0"]]
 
-  :plugins [[lein-modules "0.3.8"]
+  :plugins [[lein-modules "0.3.9"]
             [lein-cljsbuild "1.0.3"]
             [com.cemerick/clojurescript.test "0.3.1"]]
   :hooks [leiningen.cljsbuild]

@@ -9,14 +9,14 @@
 
 (defn-api local-storage-atom
   "Return a component that is an atom backed by local storage (if supported).
-  `default` is used to initialise the atom if it is not already in
-  local storage.  The ILifecycle protocol is not implemented."
-  {:sig [[schema/Any schema/Keyword :- (protocol IDeref)]]}
-  [default key]
-  (let [app-state-atom (atom default)]
-    (if js/localStorage
-      (local-storage app-state-atom key)
-      app-state-atom)))
+  `default-atom` is an atom.  It's value is used if it is not already
+  in local storage, otherwise it is reset with the value from local
+  storage.  The ILifecycle protocol is not implemented."
+  {:sig [[(protocol IDeref) schema/Keyword :- (protocol IDeref)]]}
+  [default-atom key]
+  (if js/localStorage
+    (local-storage default-atom key)
+    default-atom))
 
 ;; define a value reference type that is serialised as nil
 (deftype Filtered [v]

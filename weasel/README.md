@@ -5,11 +5,11 @@ clojurescript REPL.
 
 ## Install
 
-Add `[com.palletops/bakery-weasel "0.1.1-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-weasel "0.1.2-SNAPSHOT"]` to your
 `:dependencies` and `cemerick.piggieback/wrap-cljs-repl` to your project middleware.
 
 ```clj
-:dependencies [[com.palletops/bakery-weasel "0.1.1-SNAPSHOT"]]
+:dependencies [[com.palletops/bakery-weasel "0.1.2-SNAPSHOT"]]
 :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 ```
 ## Usage
