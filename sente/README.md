@@ -5,7 +5,7 @@ channel over websockets.
 
 ## Install
 
-Add `[com.palletops/bakery-sente "0.1.1-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-sente "0.1.2-SNAPSHOT"]` to your
 `:dependencies`.
 
 ## Usage
