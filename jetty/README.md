@@ -4,7 +4,7 @@ A [leaven][leaven] component for running a [jetty] server.
 
 ## Install
 
-Add `[com.palletops/bakery-jetty "0.1.2-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-jetty "0.2.0-SNAPSHOT"]` to your
 `:dependencies`.
 
 ## Usage

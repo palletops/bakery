@@ -3,17 +3,18 @@
   (:require-macros
    [com.palletops.api-builder.api :refer [defn-api]])
   (:require
-   [com.palletops.leaven.protocols :refer [ILifecycle]]
+   [com.palletops.leaven.protocols :refer [Startable Stoppable]]
    [schema.core :as schema]
    [weasel.repl :as weasel]
    [weasel.impls.websocket :as ws]))
 
 (defrecord Weasel [config]
-  ILifecycle
+  Startable
   (start [component]
     (when-not (weasel/alive?)
       (weasel/connect (str "ws://" (:host config) ":" (:port config))))
     component)
+  Stoppable
   (stop [component]
     (when-let [connection @(weasel/ws-connection)]
       (ws/close connection)

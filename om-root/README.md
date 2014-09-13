@@ -4,7 +4,7 @@ A [leaven][leaven] component for a root [om][om] component.
 
 ## Install
 
-Add `[com.palletops/bakery-om-root "0.1.2-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-om-root "0.2.0-SNAPSHOT"]` to your
 `:dependencies`.
 
 ## Usage
@@ -19,8 +19,6 @@ accepts two arguments with the following values:
 
 `key`
 : a keyword for the key to store the atom under in local storage.
-
-The component does not implement the `ILifecycle` protocol.
 
 ## License
 

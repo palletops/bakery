@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-weasel "0.1.2"
+(defproject com.palletops/bakery-weasel "0.2.0"
   :description "A leaven component for weasel"
   :url "https://github.com/palletops/bakery"
   :license {:name "Eclipse Public License"

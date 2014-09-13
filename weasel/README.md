@@ -5,11 +5,11 @@ clojurescript REPL.
 
 ## Install
 
-Add `[com.palletops/bakery-weasel "0.1.2-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-weasel "0.2.0-SNAPSHOT"]` to your
 `:dependencies` and `cemerick.piggieback/wrap-cljs-repl` to your project middleware.
 
 ```clj
-:dependencies [[com.palletops/bakery-weasel "0.1.2-SNAPSHOT"]]
+:dependencies [[com.palletops/bakery-weasel "0.2.0-SNAPSHOT"]]
 :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 ```
 ## Usage
@@ -26,14 +26,14 @@ takes a single map as argument with the following keys.
 
 ### Clojure Server
 
-The component does not implement the `ILifecycle` protocol.  To start
-the clojurescript repl you can call the zero argument function placed
-on the component's `:start-repl!` key.
+The component does not implement the `Startable` and `Stoppable`
+protocols.  To start the clojurescript repl you can call the zero
+argument function placed on the component's `:start-repl!` key.
 
 ### Clojurescript Client
 
-The `ILifecycle` implementation will start and stop the client
-connection.
+The `Startable` and `Stoppable` implementations will start and stop
+the client connection.
 
 ## License
 

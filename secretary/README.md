@@ -4,7 +4,7 @@ A [leaven][leaven] component for routing with [secretary][secretary].
 
 ## Install
 
-Add `[com.palletops/bakery-secretary "0.1.2-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-secretary "0.2.0-SNAPSHOT"]` to your
 `:dependencies`.
 
 ## Usage
@@ -12,7 +12,7 @@ Add `[com.palletops/bakery-secretary "0.1.2-SNAPSHOT"]` to your
 The `com.palletops.bakery.secretary/secretary`
 function returns a [leaven][leaven] component that wires up google closure's `History` to secretary.
 
-The component implements the `ILifecycle` protocol.
+The component implements the `Startable` and `Stoppable` protocols.
 
 ## License
 

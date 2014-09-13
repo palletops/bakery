@@ -5,7 +5,7 @@ clojurescript REPL.
 
 ## Install
 
-Add `[com.palletops/bakery-local-storage-atom "0.1.2-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-local-storage-atom "0.2.0-SNAPSHOT"]` to your
 `:dependencies`.
 
 ## Usage
@@ -21,7 +21,7 @@ accepts two arguments with the following values:
 `key`
 : a keyword for the key to store the atom under in local storage.
 
-The component does not implement the `ILifecycle` protocol.
+The component does not implement the `Startable` and `Stoppable` protocols.
 
 ## License
 
