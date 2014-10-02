@@ -22,7 +22,10 @@
   (start [component]
     (if server
       component
-      (assoc component :server (start handler config))))
+      (let [server (start handler config)]
+        (-> component
+            (assoc-in [:config :port] (-> server meta :local-port))
+            (assoc :server server)))))
   Stoppable
   (stop [component]
     (if server
