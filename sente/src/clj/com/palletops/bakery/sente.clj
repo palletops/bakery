@@ -22,9 +22,9 @@
      (POST path request (@ajax-post-fn request)))))
 
 (defn- start
-  [{:keys [handler path config announce-fn]} chan-sock-atom]
+  [{:keys [handler config announce-fn]} chan-sock-atom]
   {:pre [handler chan-sock-atom]}
-  (let [chan-sock (sente/make-channel-socket! path config)
+  (let [chan-sock (sente/make-channel-socket! config)
         router (sente/start-chsk-router! (:ch-recv chan-sock) handler)]
     (reset! chan-sock-atom chan-sock)
     (when announce-fn
@@ -72,11 +72,10 @@
   {:sig [[SenteOptions :- Sente]]}
   [{:keys [path handler announce-fn config]}]
   (let [chan-sock-atom (atom nil)
-        config {:path (or path "/chsk")
-                :handler handler
+        config {:handler handler
                 :announce-fn announce-fn
                 :config (merge {:type :auto} config)}]
     (map->Sente
      {:config config
       :chan-sock-atom chan-sock-atom
-      :routes (sente-routes (:path config) chan-sock-atom)})))
+      :routes (sente-routes (or path "/chsk") chan-sock-atom)})))
