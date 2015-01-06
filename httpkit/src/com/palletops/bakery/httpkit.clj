@@ -9,7 +9,8 @@
 
 (defn- start
   [handler {:keys [port join?] :as config}]
-  {:pre [handler port]}
+  {:pre [handler port]
+   :post [(fn? %)]}
   (httpkit/run-server handler config))
 
 (defn- stop
