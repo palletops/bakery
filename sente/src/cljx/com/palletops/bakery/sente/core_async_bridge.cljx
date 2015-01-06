@@ -14,26 +14,42 @@
 ;; a component to take events from sente and into a core.async channel.
 
 #+clj
-(defn send-event [send-fn {:keys [user-id event] :as ev}]
-  (send-fn user-id event))
+(defn send-event [send-fn {:keys [user-id event] :as ev} ex-handler]
+  (try
+    (send-fn user-id event)
+    (catch Throwable e
+      (ex-handler e))))
 
 #+cljs
-(defn send-event [send-fn {:keys [event timeout-ms cb-fn] :as ev}]
-  (if cb-fn
-    (send-fn event timeout-ms cb-fn)
-    (send-fn event)))
+(defn send-event [send-fn {:keys [event timeout-ms cb-fn] :as ev} ex-handler]
+  (try
+    (if cb-fn
+      (send-fn event timeout-ms cb-fn)
+      (send-fn event))
+    (catch js/Error e
+      (ex-handler e))))
 
 (defn channel->events
-  [send-fn c]
+  [send-fn c ex-handler]
+  {:pre [(fn? send-fn) c]}
   (go-loop []
     (when-let [ev (async/<! c)]
-      (send-event send-fn ev)
+      (send-event send-fn ev ex-handler)
       (recur))))
 
 (defrecord Bridge [channel sente loop-ch ex-handler]
   Startable
   (start [component]
-    (channel->events (:send-fn sente) (:chan channel))))
+    (if loop-ch
+      component
+      (assoc component
+        :loop-ch (channel->events
+                  (:send-fn (:channel-socket sente))
+                  (:chan channel)
+                  ex-handler))))
+  Stoppable
+  (stop [component]
+    (assoc component :loop-ch nil)))
 
 (defn bridge
   "Return a leaven component to forward a core-async channel via sente events.
