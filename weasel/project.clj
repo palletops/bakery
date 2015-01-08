@@ -6,5 +6,5 @@
   :plugins [[lein-modules "0.3.9"]]
   :resource-paths ["src/cljs"]
   :source-paths ["src/clj"]
-  :dependencies [[weasel "0.3.0"]
+  :dependencies [[weasel "0.4.2"]
                  [com.cemerick/piggieback "0.1.3"]])
