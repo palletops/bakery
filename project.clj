@@ -8,7 +8,7 @@
                              :exclusions [com.keminglabs/cljx]]]}}
   :source-paths ["src/clj"]
   :resource-paths ["src/cljs"]
-  :plugins [[lein-modules "0.3.9"]]
+  :plugins [[lein-modules "0.3.10"]]
   :aliases {"install" ["modules" "install"]
             "deploy" ["modules" "deploy"]
             "check" ["modules" "check"]

@@ -3,7 +3,7 @@
   :url "https://github.com/palletops/bakery"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :plugins [[lein-modules "0.3.9"]]
+  :plugins [[lein-modules "0.3.10"]]
   :prep-tasks [["cljx" "once"]]
   :resource-paths ["src/cljs" "target/generated/src/cljs"]
   :source-paths ["src/clj" "target/generated/src/clj"]

@@ -7,7 +7,7 @@
 
   :resource-paths ["src/cljs" "target/generated/src/cljs"]
   :source-paths ["src/clj" "target/generated/src/clj"]
-  :plugins [[lein-modules "0.3.9"]]
+  :plugins [[lein-modules "0.3.10"]]
   :prep-tasks [["cljx" "once"]]
   :cljx {:builds [{:source-paths ["src/cljx"]
                    :output-path "target/generated/src/clj"

@@ -38,7 +38,7 @@
                  [cheshire "5.3.1"]
                  [com.taoensso/timbre "3.3.0"]]
 
-  :plugins [[lein-modules "0.3.9"]
+  :plugins [[lein-modules "0.3.10"]
             [lein-cljsbuild "1.0.3"]
             [com.cemerick/clojurescript.test "0.3.1"]]
   :hooks [leiningen.cljsbuild]
