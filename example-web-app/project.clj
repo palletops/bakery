@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-web-app "0.2.1-SNAPSHOT"
+(defproject com.palletops/bakery-web-app "0.3.0"
   :description "A web app with bakery"
   :url "http://palletops.com/example.webapp"
   :license {:name "Eclipse Public License - v 1.0"

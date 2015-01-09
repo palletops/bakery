@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-secretary "0.2.1-SNAPSHOT"
+(defproject com.palletops/bakery-secretary "0.3.0"
   :description "A leaven component for secretary based routing"
   :url "https://github.com/palletops/bakery"
   :license {:name "Eclipse Public License"
