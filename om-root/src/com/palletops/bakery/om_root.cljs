@@ -7,10 +7,10 @@
    [om.core :as om :include-macros true]
    [schema.core :as schema]))
 
-(defrecord OmRoot [f value options]
+(defrecord OmRoot [f value options options-component]
   Startable
   (start [_]
-    (om/root f value options))
+    (om/root f value (merge options (:value options-component))))
   Stoppable
   (stop [_]
     (om/detach-root (:target options))))
@@ -20,13 +20,18 @@
 (def OmRootOptions
   {:f OmRootFun
    :value schema/Any
-   :options {schema/Keyword schema/Any}})
+   :options {schema/Keyword schema/Any}
+   :options-component schema/Any})
 
 (defn-api om-root
   "Return an om-root component"
   {:sig [[OmRootOptions :- OmRoot]
-         [OmRootFun schema/Any {schema/Keyword schema/Any} :- OmRoot]]}
+         [OmRootFun schema/Any {schema/Keyword schema/Any} :- OmRoot]
+         [OmRootFun schema/Any {schema/Keyword schema/Any} schema/Any
+          :- OmRoot]]}
   ([f value options]
-     (->OmRoot f value options))
-  ([{:keys [f value options] :as args}]
-     (map->OmRoot args)))
+   (->OmRoot f value options nil))
+  ([f value options options-component]
+   (->OmRoot f value options options-component))
+  ([{:keys [f value options options-component] :as args}]
+   (map->OmRoot args)))
