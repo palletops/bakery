@@ -8,7 +8,7 @@
 
 (def weasel-config
   {:host "localhost"
-   :port 9001})
+   :port 9002})
 
 (defmacro weasel-config-map
   "Define a macro so we can use the same config in clojurescript."

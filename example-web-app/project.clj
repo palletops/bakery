@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-web-app "0.2.0"
+(defproject com.palletops/bakery-web-app "0.3.0"
   :description "A web app with bakery"
   :url "http://palletops.com/example.webapp"
   :license {:name "Eclipse Public License - v 1.0"
@@ -10,10 +10,11 @@
   :source-paths ["src/clj" "src/cljs" "target/generated"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2277"]
-                 [org.clojure/core.async "0.1.303.0-886421-alpha"
+                 [org.clojure/clojurescript "0.0-2371"]
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"
                   :exclusions [[org.clojure/clojure]]]
 
+                 [com.palletops/bakery-core-async :version]
                  [com.palletops/bakery-httpkit :version]
                  [com.palletops/bakery-weasel :version]
                  [com.palletops/bakery-sente :version]
@@ -31,6 +32,7 @@
                  ;; server
                  [org.clojure/tools.cli "0.3.1"]
                  [org.clojure/core.match "0.2.1"]
+                 [compojure "1.3.1"]
                  [ring "1.3.0"]
                  [ring/ring-headers "0.1.0"]
                  [ring/ring-anti-forgery "1.0.0"]
@@ -38,8 +40,8 @@
                  [cheshire "5.3.1"]
                  [com.taoensso/timbre "3.3.0"]]
 
-  :plugins [[lein-modules "0.3.9"]
-            [lein-cljsbuild "1.0.3"]
+  :plugins [[lein-modules "0.3.10"]
+            [lein-cljsbuild "1.0.4"]
             [com.cemerick/clojurescript.test "0.3.1"]]
   :hooks [leiningen.cljsbuild]
 
@@ -48,8 +50,8 @@
   :cljsbuild {:builds [{:id "example.webapp"
                         :source-paths ["src/cljs"]
                         :compiler
-                        {:output-to "target/classes/public/js/example.webapp.js"
-                         :output-dir "target/classes/public/js"
+                        {:output-to "target/js/public/example.webapp.js"
+                         :output-dir "target/js/public"
                          :optimizations :none
                          :pretty-print true
                          :source-map true}}
@@ -69,7 +71,18 @@
                                       "test-resources/public/js/console-polyfill.js"
                                       "target/cljs-test/testable.js"]}}
   :profiles
-  {:dev {:dependencies [[com.facebook/react "0.11.1"]]}
+  {:dev-base {:dependencies [[com.facebook/react "0.11.1"]]
+              :plugins [[lein-figwheel "0.2.0-SNAPSHOT"]]
+              :resource-paths ["dev-resources"
+                               "resources"
+                               "target/js"]}
+   :figwheel {:dependencies [[figwheel "0.2.0-SNAPSHOT"]]
+              :figwheel
+              {:css-dirs ["resources/public/css"]
+               :resource-paths ["dev-resources"
+                                "resources"
+                                "target/js"]}}
+   :dev [:dev-base :figwheel]
    :repl {:injections [(try
                          (require
                           '[example.webapp.server.dev

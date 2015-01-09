@@ -3,6 +3,7 @@
   (:require
    [com.palletops.bakery.httpkit :as httpkit]
    [com.palletops.bakery.sente :as sente]
+   [com.palletops.bakery.sente.router :as router]
    [com.palletops.leaven :refer [start stop defsystem]]
    [compojure.core :refer [GET POST routes]]
    [compojure.route :refer [resources]]
@@ -24,7 +25,7 @@
    (resources "/")
    injected-routes
    ;; application routes
-   (GET "/*" request (index-page tags))))
+   (GET "/" request (index-page tags))))
 
 (defn wrap-random-uid
   [handler]
@@ -47,16 +48,21 @@
     {:read-token (fn [req] (-> req :params :csrf-token))})
    wrap-session))
 
-(defsystem Server [:state :server :sente :channel-socket])
+(defsystem Server [:state :server :sente :sente-router]
+  {:depends
+   {:sente-router [:sente]}})
 
 (defn server
   [options]
   (let [state (atom (default-state))
-        sente (sente/sente {:handler #'msg-handler})
+        sente (sente/sente {})
+        sente-router (router/router {:sente sente
+                                     :handler (router/handler #'msg-handler)})
         script-tags (:tags options (js-script))]
     (map->Server
      {:state state
       :sente sente
+      :sente-router sente-router
       :server (httpkit/httpkit
                {:handler (ui-app state (:routes sente) script-tags)
                 :config options})})))

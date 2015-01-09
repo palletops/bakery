@@ -4,7 +4,7 @@ A [leaven][leaven] component for routing with [secretary][secretary].
 
 ## Install
 
-Add `[com.palletops/bakery-secretary "0.2.0-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-secretary "0.3.0-SNAPSHOT"]` to your
 `:dependencies`.
 
 ## Usage

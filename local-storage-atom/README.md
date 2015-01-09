@@ -5,7 +5,7 @@ clojurescript REPL.
 
 ## Install
 
-Add `[com.palletops/bakery-local-storage-atom "0.2.0-SNAPSHOT"]` to your
+Add `[com.palletops/bakery-local-storage-atom "0.3.0-SNAPSHOT"]` to your
 `:dependencies`.
 
 ## Usage
