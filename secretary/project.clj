@@ -6,4 +6,4 @@
   :plugins [[lein-modules "0.3.10"]]
   :source-paths []
   :resource-paths ["src"]
-  :dependencies [[secretary "1.2.0"]])
+  :dependencies [[secretary "1.2.1"]])
