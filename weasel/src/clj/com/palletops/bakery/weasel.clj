@@ -20,6 +20,8 @@
   has a function to start the weasel repl on the server side."
   {:sig [[WeaselOptions :- Weasel]]}
   [{:keys [host port] :as config}]
-  {:config (merge {:host "localhost" :port 9001} config)
-   :start-repl! #(piggieback/cljs-repl
-                  :repl-env (weasel/repl-env :ip host :port port))})
+  (let [config (merge {:host "localhost" :port 9001} config)]
+    {:config config
+     :start-repl! #(piggieback/cljs-repl
+                    :repl-env (weasel/repl-env
+                               :ip (:host config) :port (:port config)))}))
