@@ -1,6 +1,7 @@
 language: clojure
 lein: lein2
 before_install:
+- echo y | sudo lein2 upgrade
 - lein2 with-profile +travis install
 before_script:
 - lein2 version
