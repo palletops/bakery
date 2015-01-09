@@ -59,7 +59,7 @@
         {:bs-style "primary"
          :on-click (fn [_]
                      (om/update! state :nav {:view :hi})
-                     (app/start-user! @state))}
+                     (app/start-user! @state (om/get-shared owner :send-fn)))}
         "Say Hi")))))
 
 (defn hi [state owner]

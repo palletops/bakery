@@ -5,9 +5,10 @@
   (assoc state :user user))
 
 (defn start-user!
-  [state]
+  [state send-fn]
+  {:pre [state send-fn]}
   (.log js/console "start user")
-  (@(:send-fn state) [:example/msg (:user state)]))
+  (send-fn [:example/msg (:user state)]))
 
 (defn greet
   [state n]

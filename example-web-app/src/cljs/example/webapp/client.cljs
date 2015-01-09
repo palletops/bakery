@@ -5,21 +5,33 @@
    [com.palletops.bakery.om-root :as om-root :refer [om-root]]
    [com.palletops.bakery.secretary :as secretary-comp :refer [secretary]]
    [com.palletops.bakery.sente :as sente]
+   ;; [com.palletops.bakery.sente.router :as router]
    [com.palletops.leaven :as leaven :include-macros true]
+   [com.palletops.leaven.protocols :refer [Startable]]
    [om.core :as om :include-macros true]
    [om-tools.dom :as dom :include-macros true]
-   [example.webapp.async :as pasync :refer [handle-recv]]
+   [example.webapp.async :as pasync :refer [webapp-async]]
    [example.webapp.nav :as nav]
    [example.webapp.view :as view]
-   [secretary.core :as secretary :include-macros true :refer [defroute]]))
+   [figwheel.client :as figwheel]
+   [secretary.core :as secretary :refer-macros [defroute]]))
 
 (enable-console-print!)
 
+(defrecord RootOptions [sente value]
+  Startable
+  (start [component]
+    (assoc component
+      :value {:shared {:send-fn (:send-fn (:channel-socket sente))}})))
+
 (leaven/defsystem Ui
-  [:app-state
-   :async
-   :routing
-   :root])
+  [app-state sente sente-handler routing root-options root]
+  {:depends
+   {:sente-handler {:sente :sente
+                    :app-state :state}
+    :root-options [:sente]
+    :root {:root-options :options-component}}})
+
 
 (defn element-by-id
   [id]
@@ -37,7 +49,10 @@
                    default-state :example-webapp)
         set-nav! (fn [v] (nav/set-nav! app-state v))
         r (secretary-comp/secretary)
-        navigate-to (:nav-fn r)]
+        navigate-to (:nav-fn r)
+        sente (sente/sente {})
+        sente-handler (webapp-async {:sente sente :state app-state})
+        root-options (map->RootOptions {:sente sente})]
 
     ;; non-global routes would be good to have!
     (defroute "/" []
@@ -51,10 +66,16 @@
 
     (map->Ui
      {:app-state app-state
-      :async (sente/sente
-              {:handler (handle-recv app-state)
-               :announce-fn #(swap! app-state assoc
-                                    :send-fn (local-storage-atom/transient-value
-                                              (:send-fn %)))})
-      :root (om-root view/root app-state {:target (element-by-id "root")})
+      :sente sente
+      :sente-handler sente-handler
+      ;; :sente-router (router/router
+      ;;                {:sente sente
+      ;;                 :handler sente-handler ;; (router/handler (handle-recv app-state))
+      ;;                 })
+      :root-options root-options
+      :root (om-root view/root app-state {:target (element-by-id "root")}
+                     root-options)
       :routing r})))
+
+(figwheel/start {:on-jsload (fn [] (println "Reloaded"))
+                 :websocket-url "ws://localhost:3449/figwheel-ws"})
