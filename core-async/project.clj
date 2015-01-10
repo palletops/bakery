@@ -14,4 +14,6 @@
                    :rules :clj}
                   {:source-paths ["src/cljx"]
                    :output-path "target/generated/src/cljs"
-                   :rules :cljs}]})
+                   :rules :cljs}]}
+  ;; :test-paths ["target/generated/test/clj"]
+  )
