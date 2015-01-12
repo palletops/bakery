@@ -27,7 +27,7 @@
       component)))
 
 (def ChannelOptions
-  {:chan-f (schema/maybe ())})
+  {(schema/optional-key :chan-f) (=> schema/Any)})
 
 (defn-api channel
   "Return a leaven component wrapping a core.async channel.

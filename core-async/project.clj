@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-core-async "0.3.0"
+(defproject com.palletops/bakery-core-async "0.3.1"
   :description "A leaven component for a core-async channel."
   :url "https://github.com/palletops/bakery"
   :license {:name "Eclipse Public License"
@@ -14,4 +14,6 @@
                    :rules :clj}
                   {:source-paths ["src/cljx"]
                    :output-path "target/generated/src/cljs"
-                   :rules :cljs}]})
+                   :rules :cljs}]}
+  ;; :test-paths ["target/generated/test/clj"]
+  )
