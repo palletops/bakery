@@ -1,4 +1,4 @@
-(defproject com.palletops/bakery-sente "0.3.1-SNAPSHOT"
+(defproject com.palletops/bakery-sente "0.3.1"
   :description "A leaven component for sente"
   :url "https://github.com/palletops/bakery"
   :license {:name "Eclipse Public License"

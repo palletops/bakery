@@ -1,3 +1,8 @@
+## 0.3.1
+
+- Fix core-async channel component signature
+  Also adds basic test for the channel component.
+
 ## 0.3.0
 
 - Update leaven to 0.3.0
